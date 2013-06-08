@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block nav %}
+<li class="active"><a href="index.html">Home</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+
+	<ul class="switches">
+		{% for switch in switches %}
+		<li>
+			<h2>{{ switch.name|safe }}</h2>
+			<div class="btn-group" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-success" onClick="turnSwitchOn('{{ switch.host }}', {{ switch.id }})">On</button>
+				<button type="button" class="btn btn-danger" onClick="turnSwitchOff('{{ switch.host }}', {{ switch.id }})">Off</button>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+
+	<ul class="sensors">
+		{% for sensor in sensors %}
+		<li><h2>{{ sensor.name|safe }}</h2></li> {{ sensor.value }}°C
+		{% endfor %}
+	</ul>
+
+</div>
+{% endblock %}
+
+{% block js %}
+    <script src="static/js/controllers.js"></script>
+{% endblock %}
