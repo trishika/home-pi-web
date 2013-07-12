@@ -17,7 +17,7 @@ except ImportError as error:
 	exit(1)
 
 try:
-	sys.path.insert(0, '../rest/')
+#	sys.path.insert(0, '../rest/')
 	from restClientLib import get_nodes
 	from restClientLib import update_sensor
 	from restClientLib import set_switch
@@ -29,16 +29,21 @@ app = Flask(__name__)
 
 # Server config
 if len(sys.argv) > 1:
-	fd = open(sys.argv[1])
-	servers = json.load(fd)
+	config = sys.argv[1]
 else:
-	print("Not enough argument")
+	config = "servers.json"
+
+try:
+	fd = open(config)
+	servers = json.load(fd)
+except:
+	print("Invalid configuration file")
 	exit(1)
 
 @app.route('/')
 def index():
 	switches,sensors = get_nodes(servers)
-	
+
 	app.logger.info("switches : %s", switches)
 	app.logger.info("sensors : %s", sensors)
 
