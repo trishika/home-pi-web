@@ -13,6 +13,9 @@ endif
 
 install:
 	mkdir -p $(CONFIG_DIR)
+	mkdir -p $(BIN_DIR)/home-web
 	cp servers.json $(CONFIG_DIR)
-	cp webServer.py $(BIN_DIR)/home-webServer.py
+	cp webServer.py $(BIN_DIR)/home-web/home-webServer.py
+	cp -R static $(BIN_DIR)/home-web/
+	cp -R templates $(BIN_DIR)/home-web/
 	cp home-web.service $(SYSTEMD_DIR)

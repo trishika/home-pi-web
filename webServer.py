@@ -17,7 +17,8 @@ except ImportError as error:
 	exit(1)
 
 try:
-#	sys.path.insert(0, '../rest/')
+	sys.path.insert(0, '../rest/')
+	sys.path.insert(0, '/usr/local/bin/')
 	from restClientLib import get_nodes
 	from restClientLib import update_sensor
 	from restClientLib import set_switch

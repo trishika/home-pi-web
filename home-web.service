@@ -1,0 +1,10 @@
+[Unit]
+Description=Domotique WEB server deamon
+
+[Service]
+ExecStart=/usr/local/bin/home-web/home-webServer.py /etc/home/servers.json
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
