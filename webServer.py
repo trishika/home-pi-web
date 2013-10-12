@@ -11,7 +11,7 @@ try:
 	import sys
 	import json
 	import urllib2
-	from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, _app_ctx_stack
+	from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 except ImportError as error:
 	print 'ImportError: ', str(error)
 	exit(1)
@@ -19,9 +19,7 @@ except ImportError as error:
 try:
 	sys.path.insert(0, '../rest/')
 	sys.path.insert(0, '/usr/local/bin/')
-	from restClientLib import get_nodes
-	from restClientLib import update_sensor
-	from restClientLib import set_switch
+	from restClientLib import get_nodes, set_switch, update_sensor, update_switch
 except ImportError as error:
 	print 'Custom py ImportError: ', str(error)
 	exit(1)
@@ -49,7 +47,8 @@ def index():
 	app.logger.info("sensors : %s", sensors)
 
 	for switch in switches:
-		app.logger.info("name : %s", switch["name"])
+		update_switch(switch)
+		app.logger.info("name : %s, status: %d", switch["name"], switch["status"])
 
 	for sensor in sensors:
 		update_sensor(sensor)
